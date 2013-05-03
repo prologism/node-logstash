@@ -402,6 +402,18 @@ Parameters:
 * ``start_line_regex``: egular expression which is used to find lines which start blocks. You have to escape special characters.
 * ``max_delay``: delay to wait the end of a block. Default value: 50 ms. Softwares which write logs by block usually write blocks in one time, this parameter is used to send lines without waiting the next matching start line.
 
+Json Fields
+---
+
+The json fields filter is used to parse the message payload as a JSON object, and merge it to the ``@fields`` attribute. This allows to automatically index fields for messages that already contain a well-formatted JSON payload. The JSON object is parsed starting from the first ``{`` character found in the message. Filter does nothing in case of error while parsing the message. Existing attribute in ``@fields`` are kept, but overwritten if they conflict with attributes from the parsed payload.
+
+Example 1: ``filter://json_fields?only_type=json_stream`` will parse the given stream of messages, which ``@type`` matches ``json_stream``, as JSON and fill the ``@fields`` attribute using the messages content.
+
+Parameters:
+
+* ``start_line_regex``: egular expression which is used to find lines which start blocks. You have to escape special characters.
+* ``max_delay``: delay to wait the end of a block. Default value: 50 ms. Softwares which write logs by block usually write blocks in one time, this parameter is used to send lines without waiting the next matching start line.
+
 Misc
 ===
 
